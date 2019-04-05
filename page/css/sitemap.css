@@ -1,0 +1,45 @@
+@import "reset.css";
+.title{
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+    line-height: 50px;
+    font-size: 20px;
+}
+
+.link{
+    border: 1px solid #eee;
+    padding: 10px;
+    width: 95%;
+    margin: 0 auto 10px;
+    font-size: 12px;
+}
+
+.link > a{
+    text-decoration: none;
+}
+
+.link > a > b{
+    font-weight: 600;
+}
+
+.article_list{
+    border: 1px solid #eee;
+    padding: 10px;
+    width: 95%;
+    margin: 0 auto;
+    font-size: 12px;
+}
+
+.article_list > h3{
+    margin: 5px 0;
+    font-weight: 600;
+}
+
+.article_list ul{
+    padding: 10px 10px;
+    margin-left: 10px;
+    line-height: 2;
+    list-style: square;
+    text-decoration: underline;
+}

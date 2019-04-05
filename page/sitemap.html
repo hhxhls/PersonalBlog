@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>站点地图</title>
+    <link rel="stylesheet" href="./css/sitemap.css">
+</head>
+<body>
+    <div class="title">个人博客's SiteMap</div>
+    <div class="link"><a href="/"> <b>博客首页</b> </a> >> 站点地图</div>
+    <div class="article_list" id="new_article">
+        <h3>最新文章</h3>
+        <ul  >
+            <li v-for="(item,index) in newArticle "><a :href="item.link">{{item.title}}</a></li>
+        </ul>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script src="lib/axios.min.js"></script>
+    <script src="JS/map.js"></script>
+</body>
+</html>

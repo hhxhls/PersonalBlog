@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章</title>
+    <link rel="stylesheet" href="./lib/quill/quill.core.css"/>
+    <link rel="stylesheet" href="./lib/quill/quill.snow.css"/>
+    <link rel="stylesheet" href="./lib/quill/quill.bubble.css"/>
+    <link rel="stylesheet" href="./css/quill.css">
+</head>
+<body>
+<h1 class="des">文章编辑界面</h1>
+<div id="quill">
+        <div class="title-sets">
+            <label> 标题：
+                <input type="text" placeholder="输入文章标题" id="title" v-model="title">
+            </label>
+            <label> 标签：
+                <input type="text" placeholder="添加标签，用逗号隔开" id="tags" v-model="tags">
+            </label>
+        </div>
+        <quill-editor ref="myTextEditor"
+                      v-model="content"
+                      :options="editorOption"
+                      @blur="onEditorBlur($event)"
+                      @focus="onEditorFocus($event)"
+                      @ready="onEditorReady($event)">
+        </quill-editor>
+        <div class="finish">
+            <button class="submit" @click="onArticleSubmit">提交文章</button>
+        </div>
+</div>
+<script type="text/javascript" src="./lib/quill/quill.js"></script>
+<script type="text/javascript" src="./lib/vue.js"></script>
+<script type="text/javascript" src="./lib/quill/vue-quill-editor.js"></script>
+<script src="./lib/axios.min.js"></script>
+<script src="JS/article.js"></script>
+</body>
+</html>

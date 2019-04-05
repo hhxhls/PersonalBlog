@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>留言</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/comments.css">
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <a href="#" class="title">我的个人博客 | 技术博客</a>
+        <ul class="menu">
+            <li><a href="/">首页</a></li>
+            <li><a href="/sitemap.html">地图</a></li>
+            <li><a href="/about.html">关于</a></li>
+            <li><a href="/comments.html">留言</a></li>
+        </ul>
+        <div class="search_bar" id="search_bar">
+            <input type="text" placeholder="输入关键词查找" v-model="searchWord">
+            <button @click="searchArticle">搜索</button>
+        </div>
+    </div>
+</header>
+<div class="content">
+    <div class="content_left">
+        <div class="description">
+            <div class="about_comment">
+                <header class="about_title">
+                    欢迎灌水交流，别看我长时间不发博，博主可一直都在线~
+                </header>
+                <p>友链只交换技术类个人博客。</p>
+                <p> 不要皮，谢谢。</p>
+            </div>
+        </div>
+        <div class="comment_list" id="comment_list">
+            <div class="total_comment">目前有 {{totalComment}} 条留言</div>
+            <div class="user_comment" v-for=" (item,index) in commentList" :key="index">
+                <div class="comment_head">
+                    <span class="nick_name">{{item.nickname}}</span>
+                    <span v-show="item.parent !== -1">回复@{{item.parentName}} </span>
+                    <span class="comment_date">发表于 {{parseDate(item.ctime * 1000)}}</span>
+                    <a class="comment_reply" @click="commentReply(index)" href="#nickname">[回复]</a>
+                </div>
+                <div class="comment_content">{{item.content}}</div>
+            </div>
+            <div class="page_tool">
+                <page-tool :count="totalComment" :page="page" :pagesize="pageSize" :searchword="''" v-on:pagechange="changePage"></page-tool>
+            </div>
+        </div>
+        <div class="post_comment" id="post_comment">
+            <div class="comment_title">发表评论</div>
+            <div class="info_line">
+                <input type="hidden" id="reply" value='reply' @input="rely=$event.target.value">
+                <input type="hidden" id="replyUser" value='replyUser' @input="rely=$event.target.value">
+                <input type="text" placeholder="昵称" class="nickname"  id="nickname" v-model="nickname">
+                <input type="text" placeholder="邮箱(评论被回复时你能收到通知)" class="email" v-model="email">
+            </div>
+            <textarea name="comment_content" id="comment_content" cols="78" rows="10" placeholder="无意义的内容恕不回复"
+                      v-model="content"></textarea>
+            <div class="captcha_line">
+                <input type="text" placeholder="验证码" v-model="captchaInput">
+                <div class="captcha_img" v-html="captchaSvg" @click="getCaptcha"></div>
+                <template>
+                    <img src="" alt="">
+                </template>
+            </div>
+            <div class="button_line">
+                <button class="submit" @click="postComment">提交留言</button>
+                <button class="reset" @click="resetComment">重写</button>
+            </div>
+        </div>
+    </div>
+    <div class="content_right">
+        <div class="right_module" id="random_tags">
+            <div class="right_module_title">随机标签名</div>
+            <a :href="item.link" v-for="(item,index) in tags" :key="index" :style="{color:randomColor(),fontSize:randomSize(),}">{{item.tagName}}</a>
+        </div>
+        <div class="right_module" id="new_hot">
+            <div class="right_module_title">最近热门</div>
+            <ul>
+                <li v-for="(item,index) in hotList" :key="item.id"><a :href="item.link">{{item.title}}</a></li>
+            </ul>
+        </div>
+        <div class="right_module" id="new_comments">
+            <div class="right_module_title">最新评论</div>
+            <ul>
+                <li v-for="(item,index) in commentList" :key = "item.id">
+                    <p class="comment_title">
+                        <span class="username">{{item.userName}}</span>
+                        <span class="time">[{{item.cdate}}]</span>
+                    </p>
+                    <p class="comment_content">{{item.comment}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="right_module">
+            <div class="right_module_title">友情链接</div>
+            <span><a href="/">挨踢茶馆</a></span><span><a href="/">挨踢茶馆</a></span>
+            <span><a href="/">挨踢茶馆</a></span><span><a href="/">挨踢茶馆</a></span>
+            <span><a href="/">挨踢茶馆</a></span><span><a href="/">挨踢茶馆</a></span>
+            <span><a href="/">挨踢茶馆</a></span><span><a href="/">挨踢茶馆</a></span>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <ul>
+        <li>C/C++</li>
+        <li>CSS/DIV</li>
+        <li>C/C++</li>
+        <li>CSS/DIV</li>
+        <li>C/C++</li>
+        <li>CSS/DIV</li>
+        <li>C/C++</li>
+        <li>CSS/DIV</li>
+        <li>C/C++</li>
+        <li>CSS/DIV</li>
+        <li>C/C++</li>
+        <li>CSS/DIV</li>
+    </ul>
+    <p>Copyright © 2010-2017 郑晓个人博客 All rights reserved. 由免费开源的WordPress强力驱动. 鲁ICP备14017955号站长统计</p>
+</footer>
+<script src="lib/vue.js"></script>
+<script src="lib/axios.min.js"></script>
+<script src="JS/base.js"></script>
+<script src="JS/comment.js"></script>
+</body>
+</html>

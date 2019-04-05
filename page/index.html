@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alex的个人小站</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./lib/quill/quill.snow.css">
+    <link rel="stylesheet" href="./lib/quill/quill.core.css">
+    <link rel="stylesheet" href="./lib/quill/quill.bubble.css">
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <a href="#" class="title">我的个人博客 | 技术博客</a>
+        <ul class="menu">
+            <li><a href="/">首页</a></li>
+            <li><a href="/sitemap.html">地图</a></li>
+            <li><a href="/about.html">关于</a></li>
+            <li><a href="/comments.html">留言</a></li>
+        </ul>
+        <div class="search_bar" id="search_bar">
+            <input type="text" placeholder="输入关键词查找" v-model="searchWord">
+            <button @click="searchArticle">搜索</button>
+        </div>
+    </div>
+</header>
+<div class="content">
+    <div class="content_left">
+        <div class="every_day" id="every_day">
+            <span class="every_day_title">每日一句</span>
+            <p>{{content.mainEN}}</p>
+            <p >{{content.mainCN}}
+                <span v-if="content.author">———— {{content.author}}</span>
+            </p>
+        </div>
+        <div class="article_list" id="article_list">
+            <div class="article" v-for="(item,index) in getArticleList" :key="item.id">
+                <a class="article_title" :href="item.link">
+                    {{item.title}}
+                </a>
+                <div class="article_content" v-html="item.content"></div>
+                <div class="article_foot">
+                    发布于{{item.date}} | 浏览({{item.views}}) | Tags：<span v-for="(v,i) in item.tags" :key="i">{{v}}{{i < item.tags.length - 1 ?'，':''}}</span>
+                </div>
+            </div>
+            <div class="page_tool">
+                <page-tool :count="count" :page="page" :pagesize="pageSize" :searchword="''" v-on:pagechange="changePage"></page-tool>
+            </div>
+        </div>
+    </div>
+    <div class="content_right">
+        <div class="right_module" id="random_tags">
+            <div class="right_module_title">随机标签名</div>
+            <a :href="item.link" v-for="(item,index) in tags" :key="index" :style="{color:randomColor(),fontSize:randomSize(),}">{{item.tagName}}</a>
+        </div>
+        <div class="right_module" id="new_hot">
+            <div class="right_module_title">最近热门</div>
+            <ul>
+                <li v-for="(item,index) in hotList" :key="item.id"><a :href="item.link">{{item.title}}</a></li>
+            </ul>
+        </div>
+        <div class="right_module" id="new_comments">
+            <div class="right_module_title">最新评论</div>
+            <ul>
+                <li v-for="(item,index) in commentList" :key = "item.id">
+                    <p class="comment_title">
+                        <span class="username">{{item.userName}}</span>
+                        <span class="time">[{{item.cdate}}]</span>
+                    </p>
+                    <p class="comment_content">{{item.comment}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="right_module">
+            <div class="right_module_title">友情链接</div>
+            <span><a href="/">挨踢茶馆</a></span><span><a href="/">挨踢茶馆</a></span>
+            <span><a href="/">挨踢茶馆</a></span><span><a href="/">挨踢茶馆</a></span>
+            <span><a href="/">挨踢茶馆</a></span><span><a href="/">挨踢茶馆</a></span>
+            <span><a href="/">挨踢茶馆</a></span><span><a href="/">挨踢茶馆</a></span>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <ul>
+        <li>C/C++</li>
+        <li>CSS/DIV</li>
+        <li>C/C++</li>
+        <li>CSS/DIV</li>
+        <li>C/C++</li>
+        <li>CSS/DIV</li>
+        <li>C/C++</li>
+        <li>CSS/DIV</li>
+        <li>C/C++</li>
+        <li>CSS/DIV</li>
+        <li>C/C++</li>
+        <li>CSS/DIV</li>
+    </ul>
+    <p>Copyright © 2010-2017 郑晓个人博客 All rights reserved. 由免费开源的WordPress强力驱动. 鲁ICP备14017955号站长统计</p>
+</footer>
+<script src="lib/vue.js"></script>
+<script src="lib/axios.min.js"></script>
+<script src="JS/base.js"></script>
+<script src="JS/index.js"></script>
+</body>
+</html>

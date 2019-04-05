@@ -1,0 +1,40 @@
+@import "reset.css";
+.ql-editor{
+    min-height: 20rem;
+    padding-bottom: 1rem;
+}
+
+#quill{
+    width: 95%;
+    margin: 0 auto;
+}
+
+.des{
+    background-color: #1f1f1f;
+    color: #eee;
+    text-align: center;
+    font-size: 30px;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+.title-sets{
+    margin: 20px 0;
+}
+
+.title-sets  #title, .title-sets  #tags, .title-sets  #author{
+    box-sizing: border-box;
+    height: 30px;
+    padding: 5px 5px;
+    outline: none;
+    margin-right: 10px;
+}
+
+.submit{
+    margin-top: 10px;
+    background-color: #1f1f1f;
+    color: #eee;
+    width: 200px;
+    padding: 10px 0;
+    outline: none;
+}
